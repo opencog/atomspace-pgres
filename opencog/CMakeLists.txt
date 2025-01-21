@@ -6,7 +6,7 @@ ADD_SUBDIRECTORY (persist)
 
 WRITE_GUILE_CONFIG(${GUILE_BIN_DIR}/opencog/pgres-config-installable.scm SCM_CONFIG FALSE)
 FILE(APPEND ${GUILE_BIN_DIR}/opencog/pgres-config-installable.scm
-   "(define-public opencog-ext-path-persist-pgres opencog-ext-path-persist-pgres)\n")
+   "(define-public opencog-ext-path-persist-sql opencog-ext-path-persist-sql)\n")
 
 INSTALL(FILES ${GUILE_BIN_DIR}/opencog/pgres-config-installable.scm DESTINATION ${GUILE_SITE_DIR}/opencog RENAME pgres-config.scm)
 

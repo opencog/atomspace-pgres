@@ -7,7 +7,7 @@ Save and restore AtomSpace contents to a PostgreSQL database.
  
 Status
 ------
-This is **Version 5.0.3**
+This is **Version 5.1.0**
 
 ***Deprecated*** -- This repo is a copy of the ***old*** Postgres
 storage implementation. It works "fine", it passes unit tests. It's
@@ -16,6 +16,9 @@ code.  However, years of experience have revealed that the design is
 not all that great. A new Postgres backend should be written, based on
 the `RocksStorageNode`, in the
 [atomspace-rocks](https://github.com/atomspace-rocks) git repo.
+
+Some missing features include:
+* Frames (multiple nested AtomSpaces)
 
 Building and Installing
 -----------------------
