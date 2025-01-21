@@ -195,7 +195,12 @@ void FetchUTest::test_stuff(void)
 	logger().debug("BEGIN TEST: %s", __FUNCTION__);
 
 	// First, initialize the database
-	eval->eval("(use-modules (opencog persist) (opencog persist-sql))");
+	std::string lstr = eval->eval("(use-modules (opencog persist) (opencog persist-sql))");
+	printf("Module load result: %s\n", lstr.c_str());
+	bool eval_err = eval->eval_error();
+	eval->clear_pending();
+	TSM_ASSERT("Failed to load persist module", !eval_err)
+
 	eval->eval(sql_open);
 	eval->eval(R"((cog-set-tv! (Concept "AAA") (stv 0.1 0.11)))");
 	eval->eval(R"((cog-set-tv! (Concept "BBB") (stv 0.2 0.22)))");
