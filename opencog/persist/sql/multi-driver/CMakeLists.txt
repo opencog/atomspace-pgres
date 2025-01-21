@@ -1,7 +1,7 @@
 # Uncomment this if SQL is installed.
 # ADD_DEFINITIONS(-DHAVE_SQL_STORAGE)
 
-ADD_LIBRARY (persist-sql
+ADD_LIBRARY (persist-sql SHARED
 	llapi.cc
 	SQLAtomDelete.cc
 	SQLAtomLoad.cc
