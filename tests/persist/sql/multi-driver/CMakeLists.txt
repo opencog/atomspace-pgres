@@ -56,9 +56,8 @@ ENDIF (PSQL_EXECUTABLE)
 # SET(DB_IS_CONFIGURED 1)
 
 LINK_LIBRARIES(
-    atomspace
-    persist
     persist-sql
+    ${AtomSpace_LIBRARIES}
 )
 
 IF (DB_IS_CONFIGURED)
