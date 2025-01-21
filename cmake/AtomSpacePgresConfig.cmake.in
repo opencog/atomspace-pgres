@@ -1,0 +1,15 @@
+@PACKAGE_INIT@
+
+include("@CMAKE_INSTALL_PREFIX@/lib/cmake/AtomSpacePgres/AtomSpacePgresTargets.cmake")
+
+link_directories(
+	"@CMAKE_INSTALL_PREFIX@/lib/opencog/"
+)
+set(ATOMSPACE_PGRES_LIBRARIES
+	persist-pg
+)
+
+set(ATOMSPACE_PGRES_DATA_DIR "@CMAKE_INSTALL_PREFIX@/share/opencog")
+set(ATOMSPACE_PGRES_INCLUDE_DIR "@CMAKE_INSTALL_PREFIX@/include/")
+set(ATOMSPACE_PGRES_VERSION "@SEMANTIC_VERSION@")
+set(ATOMSPACE_PGRES_FOUND 1)

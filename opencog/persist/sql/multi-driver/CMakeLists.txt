@@ -18,10 +18,7 @@ ADD_LIBRARY (persist-sql
 ADD_DEPENDENCIES(persist-sql opencog_atom_types atomspace)
 
 TARGET_LINK_LIBRARIES(persist-sql
-	persist
-	storage-types
-	tlb
-	atomspace
+	${AtomSpace_LIBRARIES}
 )
 
 TARGET_LINK_LIBRARIES(persist-sql smob)
@@ -44,16 +41,14 @@ IF (ODBC_FOUND)
 	)
 ENDIF (ODBC_FOUND)
 
-IF (PGSQL_FOUND)
-	INCLUDE_DIRECTORIES(${PGSQL_INCLUDE_DIRS})
-	ADD_LIBRARY (persist-pg ll-pg-cxx.cc)
-	TARGET_LINK_LIBRARIES(persist-pg ${PGSQL_LIBRARIES})
-	TARGET_LINK_LIBRARIES(persist-sql persist-pg)
+INCLUDE_DIRECTORIES(${PGSQL_INCLUDE_DIRS})
+ADD_LIBRARY (persist-pg ll-pg-cxx.cc)
+TARGET_LINK_LIBRARIES(persist-pg ${PGSQL_LIBRARIES})
+TARGET_LINK_LIBRARIES(persist-sql persist-pg)
 
-	INSTALL (TARGETS persist-pg EXPORT AtomSpaceTargets
-		DESTINATION "lib${LIB_DIR_SUFFIX}/opencog"
-	)
-ENDIF (PGSQL_FOUND)
+INSTALL (TARGETS persist-pg EXPORT AtomSpaceTargets
+	DESTINATION "lib${LIB_DIR_SUFFIX}/opencog"
+)
 
 # Test/example. Not needed for anything but hand-testing.
 # ADD_EXECUTABLE(sniff sniff.cc)
@@ -68,6 +63,6 @@ ENDIF (PGSQL_FOUND)
 # ENDIF (PGSQL_FOUND)
 
 
-INSTALL (TARGETS persist-sql EXPORT AtomSpaceTargets
+INSTALL (TARGETS persist-sql EXPORT AtomSpacePgresTargets
 	DESTINATION "lib${LIB_DIR_SUFFIX}/opencog"
 )

@@ -40,7 +40,7 @@ Then build, install and test:
 
 Example Usage
 -------------
-See the examples directory ***in the man AtomSpace repo***,
+See the examples directory ***in the main AtomSpace repo***,
 [here](https://github.com/opencog/atomspace/tree/master/examples/atomspace)
 and look for examples that contain the word `Storage`. There are
 half-a-dozen of these.

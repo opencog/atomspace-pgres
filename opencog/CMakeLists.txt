@@ -1,42 +1,12 @@
 
-# The atom_types.h file is written to the build directory
-INCLUDE_DIRECTORIES(${CMAKE_BINARY_DIR})
+# This declaration must happen before subdirectory traversal.
+DECLARE_GUILE_CONFIG_TARGET(SCM_CONFIG "opencog pgres-config" "OPENCOG_TEST")
 
-DECLARE_GUILE_CONFIG_TARGET(SCM_CONFIG "opencog as-config" "ATOMSPACE_TEST")
-
-# The build order used here is loosely in terms of 
-# dependencies: the later parts depend on, or may
-# someday depend on the earlier parts.
-#
-ADD_SUBDIRECTORY (atoms)
-ADD_SUBDIRECTORY (atomspace)
-ADD_SUBDIRECTORY (eval)
-ADD_SUBDIRECTORY (query)
 ADD_SUBDIRECTORY (persist)
 
-# Guile/scheme API bindings and utilities
-IF (HAVE_GUILE)
-	ADD_SUBDIRECTORY (guile)
-	ADD_SUBDIRECTORY (scm)
-	ADD_SUBDIRECTORY (matrix)
-ENDIF (HAVE_GUILE)
+WRITE_GUILE_CONFIG(${GUILE_BIN_DIR}/opencog/pgres-config-installable.scm SCM_CONFIG FALSE)
+FILE(APPEND ${GUILE_BIN_DIR}/opencog/pgres-config-installable.scm
+   "(define-public opencog-ext-path-persist-pgres opencog-ext-path-persist-pgres)\n")
 
-# Python3 API bindings.
-IF (HAVE_CYTHON)
-	ADD_SUBDIRECTORY (cython)
-ENDIF (HAVE_CYTHON)
+INSTALL(FILES ${GUILE_BIN_DIR}/opencog/pgres-config-installable.scm DESTINATION ${GUILE_SITE_DIR}/opencog RENAME pgres-config.scm)
 
-# Haskell bindings.
-IF (HAVE_STACK)
-	ADD_SUBDIRECTORY (haskell)
-ENDIF (HAVE_STACK)
-
-# OCaml bindings.
-IF (HAVE_OCAML)
-	ADD_SUBDIRECTORY (ocaml)
-ENDIF (HAVE_OCAML)
-
-WRITE_GUILE_CONFIG(${GUILE_BIN_DIR}/opencog/as-config.scm SCM_CONFIG TRUE)
-
-WRITE_GUILE_CONFIG(${GUILE_BIN_DIR}/opencog/as-config-installable.scm SCM_CONFIG FALSE)
-INSTALL(FILES ${GUILE_BIN_DIR}/opencog/as-config-installable.scm DESTINATION ${GUILE_SITE_DIR}/opencog RENAME as-config.scm)
