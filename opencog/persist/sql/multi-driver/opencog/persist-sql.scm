@@ -6,7 +6,7 @@
 
 (use-modules (opencog))
 (use-modules (opencog persist))
-(use-modules (opencog as-config))
+(use-modules (opencog pgres-config))
 (load-extension (string-append opencog-ext-path-persist-sql "libpersist-sql") "opencog_persist_sql_init")
 
 (export sql-clear-cache sql-clear-stats sql-close sql-create sql-open
