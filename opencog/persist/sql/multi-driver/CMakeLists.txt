@@ -15,8 +15,6 @@ ADD_LIBRARY (persist-sql
 	SQLPersistSCM.cc
 )
 
-ADD_DEPENDENCIES(persist-sql opencog_atom_types atomspace)
-
 TARGET_LINK_LIBRARIES(persist-sql
 	${AtomSpace_LIBRARIES}
 )
@@ -36,7 +34,7 @@ IF (ODBC_FOUND)
 	TARGET_LINK_LIBRARIES(persist-odbc ${ODBC_LIBRARIES})
 	TARGET_LINK_LIBRARIES(persist-sql persist-odbc)
 
-	INSTALL (TARGETS persist-odbc
+	INSTALL (TARGETS persist-odbc EXPORT AtomSpacePgresTargets
 		DESTINATION "lib${LIB_DIR_SUFFIX}/opencog"
 	)
 ENDIF (ODBC_FOUND)
@@ -46,7 +44,7 @@ ADD_LIBRARY (persist-pg ll-pg-cxx.cc)
 TARGET_LINK_LIBRARIES(persist-pg ${PGSQL_LIBRARIES})
 TARGET_LINK_LIBRARIES(persist-sql persist-pg)
 
-INSTALL (TARGETS persist-pg EXPORT AtomSpaceTargets
+INSTALL (TARGETS persist-pg EXPORT AtomSpacePgresTargets
 	DESTINATION "lib${LIB_DIR_SUFFIX}/opencog"
 )
 
