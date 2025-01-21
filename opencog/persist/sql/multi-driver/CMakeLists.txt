@@ -43,7 +43,7 @@ IF (ODBC_FOUND)
 ENDIF (ODBC_FOUND)
 
 INCLUDE_DIRECTORIES(${PGSQL_INCLUDE_DIRS})
-ADD_LIBRARY (persist-pg ll-pg-cxx.cc)
+ADD_LIBRARY (persist-pg SHARED ll-pg-cxx.cc)
 TARGET_LINK_LIBRARIES(persist-pg ${PGSQL_LIBRARIES})
 TARGET_LINK_LIBRARIES(persist-sql persist-pg)
 
