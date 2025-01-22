@@ -16,9 +16,7 @@ ADD_LIBRARY (persist-sql SHARED
 )
 
 TARGET_LINK_LIBRARIES(persist-sql
-	# XXX There should be ${Storage_LIBRARIES} but there isn't
-	tlb
-	persist
+	${ATOMSPACE_STORAGE_LIBRARIES}
 	${AtomSpace_LIBRARIES}
 )
 
