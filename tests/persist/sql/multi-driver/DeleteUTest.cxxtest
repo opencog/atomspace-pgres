@@ -264,12 +264,12 @@ void DeleteUTest::add_to_space(int idx, AtomSpace *as, std::string id)
     l[idx] = LinkCast(hl[idx]);
 
     TruthValuePtr stv6(SimpleTruthValue::createTV(0.66, 600+idx));
-    hl2[idx] = as->add_link(LIST_LINK, hl[idx], h2[idx]);
+    hl2[idx] = as->add_link(LIST_LINK, {hl[idx], h2[idx]});
     hl2[idx]->setTruthValue(stv6);
     l2[idx] = LinkCast(hl2[idx]);
 
     TruthValuePtr stv7(SimpleTruthValue::createTV(0.77, 700+idx));
-    hl3[idx] = as->add_link(EVALUATION_LINK, h1[idx], hl2[idx], h3[idx]);
+    hl3[idx] = as->add_link(EVALUATION_LINK, {h1[idx], hl2[idx], h3[idx]});
     hl3[idx]->setTruthValue(stv7);
     l3[idx] = LinkCast(hl3[idx]);
 }

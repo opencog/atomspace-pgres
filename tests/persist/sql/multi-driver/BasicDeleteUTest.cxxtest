@@ -121,7 +121,7 @@ void BasicDeleteUTest::test_duplicates(void)
 
 	Handle ha(as->add_node(CONCEPT_NODE, "a"));
 	Handle hb(as->add_node(CONCEPT_NODE, "b"));
-	Handle li(as->add_link(LIST_LINK, ha, hb, ha, hb));
+	Handle li(as->add_link(LIST_LINK, {ha, hb, ha, hb}));
 
 	// Store the link.
 	store->store_atom(li);
@@ -163,8 +163,8 @@ void BasicDeleteUTest::test_recursive(void)
 
 	Handle ha(as->add_node(CONCEPT_NODE, "a"));
 	Handle hb(as->add_node(CONCEPT_NODE, "b"));
-	Handle li(as->add_link(LIST_LINK, ha, hb));
-	Handle lj(as->add_link(LIST_LINK, ha, li));
+	Handle li(as->add_link(LIST_LINK, {ha, hb}));
+	Handle lj(as->add_link(LIST_LINK, {ha, li}));
 
 	// Store the link.
 	store->store_atom(lj);
@@ -195,8 +195,8 @@ void BasicDeleteUTest::test_recursive(void)
 	// --------------------------------------
 	// Do it again, but with a different order.
 	ha = as->add_node(CONCEPT_NODE, "a");
-	li = as->add_link(LIST_LINK, ha, hb);
-	lj = as->add_link(LIST_LINK, li, ha);
+	li = as->add_link(LIST_LINK, {ha, hb});
+	lj = as->add_link(LIST_LINK, {li, ha});
 
 	store->store_atom(lj);
 	store->barrier();
@@ -209,8 +209,8 @@ void BasicDeleteUTest::test_recursive(void)
 	// --------------------------------------
 	// Do it again, but with a complex order.
 	ha = as->add_node(CONCEPT_NODE, "a");
-	li = as->add_link(LIST_LINK, ha, hb);
-	lj = as->add_link(LIST_LINK, ha, li, ha);
+	li = as->add_link(LIST_LINK, {ha, hb});
+	lj = as->add_link(LIST_LINK, {ha, li, ha});
 
 	store->store_atom(lj);
 	store->barrier();
@@ -223,9 +223,9 @@ void BasicDeleteUTest::test_recursive(void)
 	// --------------------------------------
 	// Do it again, but more deeply.
 	ha = as->add_node(CONCEPT_NODE, "a");
-	li = as->add_link(LIST_LINK, ha, hb);
-	lj = as->add_link(LIST_LINK, ha, li, ha);
-	Handle lk = as->add_link(LIST_LINK, ha, lj, ha);
+	li = as->add_link(LIST_LINK, {ha, hb});
+	lj = as->add_link(LIST_LINK, {ha, li, ha});
+	Handle lk = as->add_link(LIST_LINK, {ha, lj, ha});
 
 	store->store_atom(lk);
 	store->barrier();

@@ -256,7 +256,7 @@ int LargeZipfTest::filler_up(AtomSpace *space)
 	int p = 0;
 	while (p<NPAIRS)
 	{
-		hpair[p] = space->add_link(LIST_LINK, hword[w1], hword[w2]);
+		hpair[p] = space->add_link(LIST_LINK, {hword[w1], hword[w2]});
 		TruthValuePtr tv(CountTruthValue::createTV(1, 0, wmax));
 		hpair[p]->setTruthValue(tv);
 
