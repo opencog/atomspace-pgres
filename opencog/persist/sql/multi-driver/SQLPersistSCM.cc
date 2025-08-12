@@ -25,7 +25,6 @@
 
 #include <opencog/atomspace/AtomSpace.h>
 #include <opencog/persist/api/StorageNode.h>
-#include <opencog/persist/api/PersistSCM.h>
 #include <opencog/guile/SchemePrimitive.h>
 
 #include "SQLAtomStorage.h"
@@ -113,8 +112,6 @@ void SQLPersistSCM::do_open(const std::string& uri)
         throw RuntimeException(TRACE_INFO,
             "sql-open: Error: Unable to connect to the database");
     }
-
-    PersistSCM::set_connection(_storage);
 }
 
 void SQLPersistSCM::do_close(void)
@@ -130,7 +127,6 @@ void SQLPersistSCM::do_close(void)
     // Only then actually call the dtor.
     _storage->close();
     _as->extract_atom(HandleCast(_storage));
-    PersistSCM::set_connection(nullptr);
     _storage = nullptr;
 }
 
