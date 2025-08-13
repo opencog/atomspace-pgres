@@ -94,7 +94,8 @@ FetchUTest::FetchUTest(void)
 	uri = mkuri("postgres", dbname, username, passwd);
 #endif
 
-	sql_open = "(sql-open \"" + uri + "\")\n";
+	sql_open = "(cog-open (PostgresStorageNode \"" + uri + "\"))\n";
+	logger().debug("Open command is %s", sql_open.c_str());
 }
 
 /*
@@ -223,7 +224,7 @@ void FetchUTest::test_stuff(void)
 	eval->eval(R"((cog-set-tv! (Concept "AAA") (stv 0.1 0.11)))");
 	eval->eval(R"((cog-set-tv! (Concept "BBB") (stv 0.2 0.22)))");
 	eval->eval("(store-atomspace)");
-	eval->eval("(sql-close)");
+	eval->eval("(cog-close)");
 
 	_as = createAtomSpace();
 	eval = SchemeEval::get_evaluator(_as);
@@ -254,7 +255,7 @@ void FetchUTest::test_stuff(void)
 	// Saving everything should not crash.  It should, however,
 	// change the TV on (Concept "BBB") back to DEFAULT_TV.
 	eval->eval("(store-atomspace)");
-	eval->eval("(sql-close)");
+	eval->eval("(cog-close)");
 
 	_as = createAtomSpace();
 	eval = SchemeEval::get_evaluator(_as);
@@ -278,7 +279,7 @@ void FetchUTest::test_stuff(void)
 	printf("Expecting %s\n", dtv->to_string().c_str());
 	printf("Got %s\n", tv->to_string().c_str());
 
-	eval->eval("(sql-close)");
+	eval->eval("(cog-close)");
 	logger().debug("END TEST: %s", __FUNCTION__);
 }
 
@@ -308,7 +309,7 @@ void FetchUTest::xxxtest_readonly(void)
 	eval->eval(R"((cog-set-tv! (Concept "BBB") (stv 0.2 0.22)))");
 	eval->eval(R"((List (Concept "AAA") (Concept "BBB")))");
 	eval->eval("(store-atomspace)");
-	eval->eval("(sql-close)");
+	eval->eval("(cog-close)");
 
 	_as = createAtomSpace();
 	eval = SchemeEval::get_evaluator(_as);
