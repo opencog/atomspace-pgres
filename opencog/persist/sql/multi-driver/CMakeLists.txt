@@ -15,10 +15,18 @@ ADD_LIBRARY (persist-sql SHARED
 	SQLPersistSCM.cc
 )
 
+# Include the generated atom types header directory
+TARGET_INCLUDE_DIRECTORIES(persist-sql PRIVATE
+	${CMAKE_BINARY_DIR}
+)
+
 TARGET_LINK_LIBRARIES(persist-sql
+	persist-sql-types
 	${ATOMSPACE_STORAGE_LIBRARIES}
 	${AtomSpace_LIBRARIES}
 )
+
+ADD_DEPENDENCIES(persist-sql persist_sql_atom_types)
 
 TARGET_LINK_LIBRARIES(persist-sql smob)
 ADD_GUILE_EXTENSION(SCM_CONFIG persist-sql "opencog-ext-path-persist-sql")
