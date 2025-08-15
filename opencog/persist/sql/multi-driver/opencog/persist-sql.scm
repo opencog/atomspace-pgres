@@ -7,6 +7,13 @@
 (use-modules (opencog))
 (use-modules (opencog persist))
 (use-modules (opencog pgres-config))
+
+; Load the C library that calls the classserver to load the types.
+(load-extension (string-append opencog-ext-path-persist-sql-types "libpersist-sql-types") "persist_sql_types_init")
+
+; Load the persist-sql types scheme bindings
+(load-from-path "opencog/persist/sql/types/persist_sql_types.scm")
+
 (load-extension (string-append opencog-ext-path-persist-sql "libpersist-sql") "opencog_persist_sql_init")
 
 (export sql-clear-cache sql-clear-stats sql-close sql-create sql-open
