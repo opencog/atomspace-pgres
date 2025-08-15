@@ -1,0 +1,8 @@
+//
+// Script for generating the PostgresStorageNode atom type.
+// This defines this Atom type, required for using this
+// StorageNode.
+//
+POSTGRES_STORAGE_NODE <- STORAGE_NODE
+
+// That's all folks!  Nothing more is needed here!
