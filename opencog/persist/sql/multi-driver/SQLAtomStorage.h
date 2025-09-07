@@ -37,7 +37,6 @@
 #include <opencog/atoms/value/FloatValue.h>
 #include <opencog/atoms/value/LinkValue.h>
 #include <opencog/atoms/value/StringValue.h>
-#include <opencog/atoms/base/Valuation.h>
 
 #include <opencog/atomspace/AtomSpace.h>
 #include <opencog/persist/api/StorageNode.h>
@@ -150,7 +149,6 @@ class SQLAtomStorage : public StorageNode
 		// --------------------------
 		// Valuations
 		std::mutex _valuation_mutex;
-		void storeValuation(const ValuationPtr&);
 		void storeValuation(const Handle&, const Handle&, const ValuePtr&);
 		void deleteValuation(const Handle&, const Handle&);
 		void deleteValuation(Response&, UUID, UUID);

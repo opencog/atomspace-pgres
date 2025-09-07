@@ -30,7 +30,6 @@
 #include <opencog/atoms/value/FloatValue.h>
 #include <opencog/atoms/value/LinkValue.h>
 #include <opencog/atoms/value/StringValue.h>
-#include <opencog/atoms/base/Valuation.h>
 #include <opencog/atoms/truthvalue/TruthValue.h>
 
 #include "SQLAtomStorage.h"
@@ -182,11 +181,6 @@ void SQLAtomStorage::deleteValuation(Response& rp, UUID key_uid, UUID atom_uid)
  * Store a valuation. Return an integer ID for that valuation.
  * Thread-safe.
  */
-void SQLAtomStorage::storeValuation(const ValuationPtr& valn)
-{
-	storeValuation(valn->key(), valn->atom(), valn->value());
-}
-
 void SQLAtomStorage::storeValuation(const Handle& key,
                                     const Handle& atom,
                                     const ValuePtr& pap)
