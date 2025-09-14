@@ -61,7 +61,7 @@ void SQLAtomStorage::setAtomSpace(AtomSpace* tb)
 	Atom::setAtomSpace(tb);
 }
 
-void SQLAtomStorage::extract_callback(const AtomPtr& atom)
+void SQLAtomStorage::extract_callback(const Handle& atom)
 {
 	_tlbuf.removeAtom(atom);
 }

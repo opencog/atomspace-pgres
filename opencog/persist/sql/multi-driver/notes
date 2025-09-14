@@ -98,11 +98,11 @@ AtomSpace::store_atom(Handle h)
 AtomSpace::fetch_atom(Handle h)
 
 
-AtomPtrSignal&
+HandleSignal&
 
 removeAtomSignal
 
-const AtomPtr&
+const Handle&
 
 removeAtomSignal()
 
@@ -347,7 +347,7 @@ is where it goes wrong. Need to fetch the uuid.
 PseudoPtr petAtom(UUID);a x no uuid not known yet.
 
 PseudoPtr po(store->petAtom(idu));
-AtomPtr ra = get_recursive_if_not_exists(po);  --> this sets the TV.
+Handle ra = get_recursive_if_not_exists(po);  --> this sets the TV.
 
 needs to place into TLB... near line 218  not its done ...
 Handle TLB::getAtom(UUID uuid)
@@ -583,7 +583,7 @@ hl[ is not in atomspace!?
 Oh, because createLink isn't behaving as expected...
 
 Ahh
-AtomPtr a(_classserver.factory(Handle(orig)));
+Handle a(_classserver.factory(Handle(orig)));
 
 std::sort(_outgoing.begin(), _outgoing.end(), handle_less());
 

@@ -255,7 +255,7 @@ class SQLAtomStorage : public StorageNode
 		void destroy(void) { kill_data(); /* TODO also delete the db */ }
 		void erase(void) { kill_data(); }
 
-		void extract_callback(const AtomPtr&);
+		void extract_callback(const Handle&);
 		int _extract_sig;
 
 		// AtomStorage interface
@@ -294,14 +294,8 @@ class PostgresStorageNode : public SQLAtomStorage
 		static Handle factory(const Handle&);
 };
 
-typedef std::shared_ptr<PostgresStorageNode> PostgresStorageNodePtr;
-static inline PostgresStorageNodePtr PostgresStorageNodeCast(const Handle& h)
-   { return std::dynamic_pointer_cast<PostgresStorageNode>(h); }
-static inline PostgresStorageNodePtr PostgresStorageNodeCast(AtomPtr a)
-   { return std::dynamic_pointer_cast<PostgresStorageNode>(a); }
-
-#define createPostgresStorageNode std::make_shared<PostgresStorageNode>
-
+NODE_PTR_DECL(PostgresStorageNode)
+#define createPostgresStorageNode CREATE_DECL(PostgresStorageNode)
 
 /** @}*/
 } // namespace opencog
