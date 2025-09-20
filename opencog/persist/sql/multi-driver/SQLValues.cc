@@ -30,7 +30,7 @@
 #include <opencog/atoms/value/FloatValue.h>
 #include <opencog/atoms/value/LinkValue.h>
 #include <opencog/atoms/value/StringValue.h>
-#include <opencog/atoms/truthvalue/TruthValue.h>
+#include <opencog/atoms/truthvalue/SimpleTruthValue.h>
 
 #include "SQLAtomStorage.h"
 #include "SQLResponse.h"
@@ -591,8 +591,9 @@ void SQLAtomStorage::store_atom_values(const Handle& atom)
 
 	// Special-case for TruthValues. Can we get rid of this someday?
 	// Delete default TV's, else storage will get clogged with them.
+	static TruthValuePtr default_tv = createSimpleTruthValue(1.0, 0.0);
 	TruthValuePtr tv(atom->getTruthValue());
-	if (tv->isDefaultTV()) deleteValuation(tvpred, atom);
+	if (*default_tv == *tv) deleteValuation(tvpred, atom);
 }
 
 /// Get ALL of the values associated with an atom.
