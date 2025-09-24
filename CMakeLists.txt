@@ -9,14 +9,12 @@
 # -- print pretty summary
 #
 
-# cogutils already requires 3.0.2, so may as well ask for that.
-CMAKE_MINIMUM_REQUIRED(VERSION 3.0.2)
-IF (COMMAND CMAKE_POLICY)
-	# These must be explicitly set, as otherwise warnings are printed.
-	CMAKE_POLICY(SET CMP0003 NEW)
-	CMAKE_POLICY(SET CMP0037 NEW)
-	CMAKE_POLICY(SET CMP0045 NEW)
-ENDIF (COMMAND CMAKE_POLICY)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.12)
+
+# Python venv seems to need this.
+IF(CMAKE_VERSION VERSION_GREATER 3.31)
+   CMAKE_POLICY(SET CMP0177 NEW)
+ENDIF(CMAKE_VERSION VERSION_GREATER 3.31)
 
 PROJECT(atomspace-pgres)
 
