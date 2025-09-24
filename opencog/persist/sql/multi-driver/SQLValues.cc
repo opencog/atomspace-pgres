@@ -592,8 +592,9 @@ void SQLAtomStorage::store_atom_values(const Handle& atom)
 	// Special-case for TruthValues. Can we get rid of this someday?
 	// Delete default TV's, else storage will get clogged with them.
 	static TruthValuePtr default_tv = createSimpleTruthValue(1.0, 0.0);
-	TruthValuePtr tv(atom->getTruthValue());
-	if (*default_tv == *tv) deleteValuation(tvpred, atom);
+	TruthValuePtr tv(TruthValueCast(atom->getValue(truth_key())));
+	if ((nullptr == tv.get()) or (*default_tv == *tv))
+		deleteValuation(tvpred, atom);
 }
 
 /// Get ALL of the values associated with an atom.
